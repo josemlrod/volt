@@ -4,17 +4,19 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { getFeaturedProducts } from '@/lib/products';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   type CarouselApi,
 } from '@/components/ui/carousel';
+import { Product } from '@/lib/products';
 
-const featured = getFeaturedProducts().slice(0, 5);
+type Props = {
+  featured: Product[];
+};
 
-export function HeroCarousel() {
+export function HeroCarousel({ featured }: Props) {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
 

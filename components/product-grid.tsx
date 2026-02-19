@@ -1,11 +1,15 @@
 'use client';
 import { useState } from 'react';
-import { products, categories } from '@/lib/products';
+import { categories, Product } from '@/lib/products';
 import { ProductCard } from '@/components/product-card';
 import { useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
-export function ProductGrid() {
+type Props = {
+  products: Product[];
+};
+
+export function ProductGrid({ products }: Props) {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get('category');
   const [active, setActive] = useState(categoryParam || 'All');
