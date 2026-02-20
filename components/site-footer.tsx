@@ -14,7 +14,7 @@ const footerLinks = [
   {
     title: 'Support',
     links: [
-      { label: 'Contact', href: '#' },
+      { label: 'Contact', href: '/contact' },
       { label: 'Shipping', href: '#' },
       { label: 'Returns', href: '#' },
       { label: 'FAQ', href: '#' },

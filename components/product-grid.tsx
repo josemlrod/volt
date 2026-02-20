@@ -1,9 +1,8 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { categories, Product } from '@/lib/products';
 import { ProductCard } from '@/components/product-card';
-import { useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 
 type Props = {
   products: Product[];
@@ -11,14 +10,25 @@ type Props = {
 
 export function ProductGrid({ products }: Props) {
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
   const categoryParam = searchParams.get('category');
   const [active, setActive] = useState(categoryParam || 'All');
 
+  // Sincronizar estado con la URL cuando cambia
   useEffect(() => {
-    if (categoryParam) {
-      setActive(categoryParam);
+    const category = categoryParam || 'All';
+    setActive(category);
+  }, [categoryParam, pathname]);
+
+  const handleCategoryClick = (category: string) => {
+    setActive(category);
+    if (category === 'All') {
+      router.push('/');
+    } else {
+      router.push(`/?category=${category}`);
     }
-  }, [categoryParam]);
+  };
 
   const filtered =
     active === 'All' ? products : products.filter((p) => p.category === active);
@@ -33,7 +43,7 @@ export function ProductGrid({ products }: Props) {
         {categories.map((cat) => (
           <button
             key={cat}
-            onClick={() => setActive(cat)}
+            onClick={() => handleCategoryClick(cat)}
             className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
               active === cat
                 ? 'bg-foreground text-background'
