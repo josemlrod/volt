@@ -18,9 +18,15 @@ export default async function Home() {
   );
   const { data: featured } = await getFeaturedProductsResponse.json();
 
-  const allProductsResponse = await fetch(`${DOMAIN}/all-products`, {
-    method: 'GET',
-  });
+  // TODO:
+  // implement UI to paginate
+  // replace static values here
+  const allProductsResponse = await fetch(
+    `${DOMAIN}/all-products?page=1&itemsPerPage=25`,
+    {
+      method: 'GET',
+    },
+  );
   const { data: allProducts } = await allProductsResponse.json();
 
   return (
