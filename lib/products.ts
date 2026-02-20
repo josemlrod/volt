@@ -121,7 +121,7 @@ export const products: Product[] = [
     price: 249,
     originalPrice: 299,
     image:
-      'https://images.unsplash.com/photo-1597872200370-493dea23928e?q=80&w=800',
+      'https://images.unsplash.com/photo-1591488320449-011701bb6704?q=80&w=800', // Updated to Hardware Component
     category: 'Components',
     badge: 'Sale',
     specs: [
@@ -138,7 +138,7 @@ export const products: Product[] = [
       'Ultra-lightweight wireless gaming mouse with a precision 25K DPI sensor.',
     price: 129,
     image:
-      'https://images.unsplash.com/photo-1527669219347-9b7d0791c05e?q=80&w=800',
+      'https://images.unsplash.com/photo-1527661591475-527312dd65f5?q=80&w=800', // Updated working Mouse image
     category: 'Peripherals',
     specs: ['25K DPI Sensor', '70hr Battery', '58g Weight', 'USB-C Charging'],
   },
@@ -166,7 +166,7 @@ export const products: Product[] = [
       'Professional-grade 4K webcam with AI auto-framing and low-light correction.',
     price: 199,
     image:
-      'https://images.unsplash.com/photo-1588515724527-074a7a59f35c?q=80&w=800',
+      'https://images.unsplash.com/photo-1629429408209-1f912961dbd8?q=80&w=800', // Updated to actual Webcam
     category: 'Peripherals',
     specs: [
       '4K @ 30fps',
@@ -191,8 +191,6 @@ export const products: Product[] = [
       'Multi-room Sync',
     ],
   },
-
-  // --- NEW PRODUCTS (13-50) ---
   {
     id: 'cpu-core-i9',
     name: 'Intel Core i9-14900K',
@@ -314,7 +312,7 @@ export const products: Product[] = [
       'AMD flagship graphics card with RDNA 3 architecture for exceptional 4K gaming.',
     price: 949,
     image:
-      'https://images.unsplash.com/photo-1587202377425-8b6ae3a3c1a8?q=80&w=800',
+      'https://images.unsplash.com/photo-1555617766-c94804975da3?q=80&w=800', // Fixed broken URL
     category: 'Components',
     specs: ['24GB GDDR6', 'DisplayPort 2.1', 'RDNA 3', '355W TBP'],
   },
@@ -390,7 +388,7 @@ export const products: Product[] = [
       'High-airflow mid-tower case with three pre-installed PWM fans and glass side panel.',
     price: 139,
     image:
-      'https://images.unsplash.com/photo-1587202377425-8b6ae3a3c1a8?q=80&w=800',
+      'https://images.unsplash.com/photo-1547082299-de196ea013d6?q=80&w=800', // Fixed generic component image
     category: 'Components',
     specs: [
       'E-ATX Support',
@@ -406,7 +404,7 @@ export const products: Product[] = [
       '25,000mAh portable charger with PD 3.1 140W fast charging for laptops.',
     price: 159,
     image:
-      'https://images.unsplash.com/photo-1609592806457-9388f63567b5?q=80&w=800',
+      'https://images.unsplash.com/photo-1594843665794-446ce915d840?q=80&w=800', // Fixed broken power bank image
     category: 'Gadgets',
     specs: ['25000mAh', '140W USB-C PD', 'OLED Status Screen', '3-port Output'],
   },
@@ -451,7 +449,7 @@ export const products: Product[] = [
       'High-reliability NAS hard drive for 24/7 operation and RAID setups.',
     price: 189,
     image:
-      'https://images.unsplash.com/photo-1531492746076-1a1bd9bd2fc2?q=80&w=800',
+      'https://images.unsplash.com/photo-1760623227551-2eae8f9cb675?q=80&w=800', // Updated working HDD image
     category: 'Storage',
     specs: ['7200 RPM', '256MB Cache', 'CMR Technology', '3yr Warranty'],
   },
@@ -474,7 +472,7 @@ export const products: Product[] = [
       'Triple fan liquid cooler with customizable LCD display on the pump.',
     price: 189,
     image:
-      'https://images.unsplash.com/photo-1587202377425-8b6ae3a3c1a8?q=80&w=800',
+      'https://images.unsplash.com/photo-1742654055834-fe522708508a?q=80&w=800',
     category: 'Components',
     specs: [
       '360mm Radiator',
@@ -490,7 +488,7 @@ export const products: Product[] = [
       'Pro-grade controller with back paddles and adjustable trigger stops.',
     price: 179,
     image:
-      'https://images.unsplash.com/photo-1600080972464-8e5f35802446?q=80&w=800',
+      'https://images.unsplash.com/photo-1535043205849-513fe27db33e?q=80&w=800',
     category: 'Gaming',
     specs: [
       'Hall Effect Sticks',
@@ -506,7 +504,7 @@ export const products: Product[] = [
       'Ultra short throw 4K laser projector for massive screens in small rooms.',
     price: 2499,
     image:
-      'https://images.unsplash.com/photo-1535016120720-40c646bebbdc?q=80&w=800',
+      'https://images.unsplash.com/photo-1615286922420-c6b348ffbd62?q=80&w=800',
     category: 'Displays',
     specs: ['4K Resolution', '2500 Lumens', '150" Max Size', 'Android TV'],
   },
@@ -574,7 +572,7 @@ export const products: Product[] = [
     description: 'Drop-proof and waterproof external SSD for rugged workflows.',
     price: 329,
     image:
-      'https://images.unsplash.com/photo-1531492746076-1a1bd9bd2fc2?q=80&w=800',
+      'https://images.unsplash.com/photo-1590674899484-d5640e854abe?q=80&w=800', // Updated to External SSD image
     category: 'Storage',
     badge: 'Sale',
     specs: [
@@ -616,7 +614,7 @@ export const products: Product[] = [
     description: 'Prevent GPU sag with this stylish ARGB bracket.',
     price: 29,
     image:
-      'https://images.unsplash.com/photo-1587202377425-8b6ae3a3c1a8?q=80&w=800',
+      'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?q=80&w=800', // Updated working hardware image
     category: 'Components',
     specs: [
       'Universal Support',
@@ -632,7 +630,7 @@ export const products: Product[] = [
       'Uninterruptible power supply with battery backup and surge protection.',
     price: 229,
     image:
-      'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=800',
+      'https://images.unsplash.com/photo-1563770660941-20978e870e26?q=80&w=800', // Updated to Power equipment
     category: 'Gadgets',
     specs: ['1500VA / 900W', 'LCD Display', '10 Outlets', 'AVR Correction'],
   },
@@ -654,7 +652,7 @@ export const products: Product[] = [
       'Control your home appliances via smartphone or voice control.',
     price: 45,
     image:
-      'https://images.unsplash.com/photo-1558002038-1055907df8d7?q=80&w=800',
+      'https://images.unsplash.com/photo-1550418290-a8d86ad674a6?q=80&w=800',
     category: 'Smart Home',
     specs: [
       'Energy Monitoring',
@@ -669,7 +667,7 @@ export const products: Product[] = [
     description: 'Full HD webcam with a built-in physical privacy shutter.',
     price: 79,
     image:
-      'https://images.unsplash.com/photo-1588515724527-074a7a59f35c?q=80&w=800',
+      'https://images.unsplash.com/photo-1629429408209-1f912961dbd8?q=80&w=800', // Updated to actual webcam
     category: 'Peripherals',
     specs: ['1080p 60fps', 'Dual Mic', 'Privacy Cover', 'Auto-focus'],
   },
@@ -680,7 +678,7 @@ export const products: Product[] = [
       '120mm PWM fans with vibrant lighting and high static pressure.',
     price: 59,
     image:
-      'https://images.unsplash.com/photo-1587202377425-8b6ae3a3c1a8?q=80&w=800',
+      'https://images.unsplash.com/photo-1591488320449-011701bb6704?q=80&w=800', // Hardware replacement
     category: 'Components',
     specs: ['120mm PWM', 'ARGB Ring', '1800 RPM Max', 'Rubber Mounts'],
   },
@@ -691,7 +689,7 @@ export const products: Product[] = [
       'Low-latency wireless gaming headset with virtual surround sound.',
     price: 149,
     image:
-      'https://images.unsplash.com/photo-1599666505317-7bd144c1112b?q=80&w=800',
+      'https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?q=80&w=800', // Fixed audio/gaming image
     category: 'Audio',
     specs: [
       '2.4GHz Wireless',
@@ -699,9 +697,8 @@ export const products: Product[] = [
       '7.1 Surround',
       '50mm Drivers',
     ],
-  },
-];
-
+  }
+]
 export const categories = [
   'All',
   'Components',
