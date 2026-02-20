@@ -14,19 +14,7 @@ const footerLinks = [
   {
     title: 'Support',
     links: [
-      { label: 'Contact', href: '/contact' },
-      { label: 'Shipping', href: '#' },
-      { label: 'Returns', href: '#' },
-      { label: 'FAQ', href: '#' },
-    ],
-  },
-  {
-    title: 'Company',
-    links: [
-      { label: 'About', href: '#' },
-      { label: 'Careers', href: '#' },
-      { label: 'Press', href: '#' },
-      { label: 'Blog', href: '#' },
+      { label: 'Contact', href: '/contact' }
     ],
   },
 ];
@@ -35,7 +23,7 @@ export function SiteFooter() {
   return (
     <footer className='border-t border-border/40 bg-background'>
       <div className='mx-auto max-w-7xl px-4 py-12 lg:px-8'>
-        <div className='grid grid-cols-2 gap-8 md:grid-cols-4'>
+        <div className='grid grid-cols-2 gap-8 md:grid-cols-3'>
           <div>
             <Link href='/' className='text-lg font-semibold tracking-tight'>
               VOLT
