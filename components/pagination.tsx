@@ -1,46 +1,65 @@
-import {
-    Pagination,
-    PaginationContent,
-    PaginationEllipsis,
-    PaginationItem,
-    PaginationLink,
-    PaginationNext,
-    PaginationPrevious,
-  } from "@/components/ui/pagination"
-  import { categories, Product } from '@/lib/products';
+'use client';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-  type PaginationPageProps = {
-    currentPage: number;
-    totalPages: number;
-    basePath?: string;
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/components/ui/pagination';
+
+type ProductsPaginationProps = {
+  currentPage: number;
+  totalPages: number;
+};
+
+export function ProductsPagination({
+  currentPage,
+  totalPages,
+}: ProductsPaginationProps) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const setPageNumber = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const page = e.currentTarget.dataset.value;
+
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('page', String(page));
+
+    router.push(pathname + '?' + params.toString(), { scroll: false });
   };
 
-  export function PaginationPage({currentPage,totalPages,basePath}:PaginationPageProps) {
-    return (
-      <Pagination>
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious href="#" />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#" isActive>1</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#">2</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#">3</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#">10</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationNext href="#" />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
-    )
-  }
+  const links = Array.from({ length: totalPages }).map((_, index) => index + 1);
+
+  return (
+    <Pagination>
+      <PaginationContent>
+        <PaginationItem>
+          <PaginationPrevious />
+        </PaginationItem>
+        {links.map((num) => {
+          return (
+            <PaginationItem>
+              <PaginationLink
+                onClick={setPageNumber}
+                data-value={num}
+                key={num}
+                isActive={Number(currentPage) === num}
+              >
+                {num}
+              </PaginationLink>
+            </PaginationItem>
+          );
+        })}
+        <PaginationItem>
+          <PaginationNext />
+        </PaginationItem>
+      </PaginationContent>
+    </Pagination>
+  );
+}
+
