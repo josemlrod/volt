@@ -1,16 +1,23 @@
 export const dynamic = 'force-dynamic';
 
 import { Suspense } from 'react';
-import { PaginationPage } from '@/components/pagination';
+
+import { ProductsPagination } from '@/components/pagination';
 import { HeroCarousel } from '@/components/hero-carousel';
 import { ProductGrid } from '@/components/product-grid';
-import { products } from '@/lib/products';
 
 const DOMAIN = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : 'http://localhost:3000';
 
-export default async function Home() {
+type PageProps = {
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+export default async function Home({ searchParams }: PageProps) {
+  const { page = 1 } = await searchParams;
+
   const getFeaturedProductsResponse = await fetch(
     `${DOMAIN}/get-featured-products`,
     {
@@ -23,19 +30,25 @@ export default async function Home() {
   // implement UI to paginate
   // replace static values here
   const allProductsResponse = await fetch(
-    `${DOMAIN}/all-products?page=1&itemsPerPage=4`,
+    `${DOMAIN}/all-products?page=${page}&itemsPerPage=10`,
     {
       method: 'GET',
     },
   );
-  const { data: allProducts } = await allProductsResponse.json();
+  const {
+    data: allProducts,
+    currentPage,
+    totalPages,
+  } = await allProductsResponse.json();
+
+  console.log({ currentPage, totalPages });
 
   return (
     <>
       <HeroCarousel featured={featured} />
       <Suspense>
         <ProductGrid products={allProducts} />
-        <PaginationPage currentPage={1} totalPages={10} basePath='/'/>
+        <ProductsPagination currentPage={currentPage} totalPages={totalPages} />
       </Suspense>
     </>
   );
