@@ -34,7 +34,6 @@ export function ProductsPagination({
   };
 
   const links = Array.from({ length: totalPages }).map((_, index) => index + 1);
-  console.log({ links });
 
   return (
     <Pagination>
