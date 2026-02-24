@@ -1,9 +1,10 @@
 export const dynamic = 'force-dynamic';
 
 import { Suspense } from 'react';
-
+import { PaginationPage } from '@/components/pagination';
 import { HeroCarousel } from '@/components/hero-carousel';
 import { ProductGrid } from '@/components/product-grid';
+import { products } from '@/lib/products';
 
 const DOMAIN = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -22,7 +23,7 @@ export default async function Home() {
   // implement UI to paginate
   // replace static values here
   const allProductsResponse = await fetch(
-    `${DOMAIN}/all-products?page=1&itemsPerPage=25`,
+    `${DOMAIN}/all-products?page=1&itemsPerPage=4`,
     {
       method: 'GET',
     },
@@ -34,6 +35,7 @@ export default async function Home() {
       <HeroCarousel featured={featured} />
       <Suspense>
         <ProductGrid products={allProducts} />
+        <PaginationPage currentPage={1} totalPages={10} basePath='/'/>
       </Suspense>
     </>
   );
