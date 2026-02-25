@@ -4,7 +4,6 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
@@ -26,20 +25,29 @@ export function ProductsPagination({
 
   const setPageNumber = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const page = e.currentTarget.dataset.value;
-
     const params = new URLSearchParams(searchParams.toString());
     params.set('page', String(page));
-
     router.push(pathname + '?' + params.toString(), { scroll: false });
   };
 
   const links = Array.from({ length: totalPages }).map((_, index) => index + 1);
+  const isFirstPage = Number(currentPage) <= 1;
+  const isLastPage = Number(currentPage) >= Number(totalPages);
 
   return (
     <Pagination>
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious />
+          <PaginationPrevious
+            aria-disabled={isFirstPage} className={isFirstPage ? 'pointer-events-none opacity-50' : ''}
+            onClick={() => {
+              if (isFirstPage) return;
+              router.push(
+                `/?page=${Number(currentPage) - 1}&itemsPerPage=${Number(4)}`,
+                { scroll: false }
+              );
+            }}
+          />
         </PaginationItem>
         {links.map((num) => {
           return (
@@ -56,7 +64,16 @@ export function ProductsPagination({
           );
         })}
         <PaginationItem>
-          <PaginationNext />
+          <PaginationNext
+            aria-disabled={isLastPage} className={isLastPage ? 'pointer-events-none opacity-50' : ''}
+            onClick={() => {
+              if (isLastPage) return;
+              router.push(
+                `/?page=${Number(currentPage) + 1}&itemsPerPage=${Number(4)}`,
+                { scroll: false }
+              );
+            }}
+          />
         </PaginationItem>
       </PaginationContent>
     </Pagination>

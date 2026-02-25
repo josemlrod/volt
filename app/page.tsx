@@ -41,7 +41,6 @@ export default async function Home({ searchParams }: PageProps) {
     totalPages,
   } = await allProductsResponse.json();
 
-  console.log({ currentPage, totalPages });
 
   return (
     <>
