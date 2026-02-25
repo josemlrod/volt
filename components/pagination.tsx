@@ -26,10 +26,9 @@ export function ProductsPagination({
 
   const setPageNumber = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const page = e.currentTarget.dataset.value;
-
     const params = new URLSearchParams(searchParams.toString());
     params.set('page', String(page));
-
+    console.log(page)
     router.push(pathname + '?' + params.toString(), { scroll: false });
   };
 
@@ -39,7 +38,8 @@ export function ProductsPagination({
     <Pagination>
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious />
+          <PaginationPrevious  onClick={() =>{
+            router.push(`/?page=${Number(currentPage) - 1}&itemsPerPage=${Number(4)}`,{scroll: false})}}  isActive= {Number(currentPage) == 1 || false}/>
         </PaginationItem>
         {links.map((num) => {
           return (
@@ -56,7 +56,8 @@ export function ProductsPagination({
           );
         })}
         <PaginationItem>
-          <PaginationNext />
+          <PaginationNext onClick={() =>{
+            router.push(`/?page=${Number(currentPage) + 1}&itemsPerPage=${Number(4)}`,{scroll: false})}} isActive= {Number(currentPage) == 5 || false}/>
         </PaginationItem>
       </PaginationContent>
     </Pagination>
