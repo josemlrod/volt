@@ -28,7 +28,6 @@ export function ProductsPagination({
     const page = e.currentTarget.dataset.value;
     const params = new URLSearchParams(searchParams.toString());
     params.set('page', String(page));
-    console.log(page)
     router.push(pathname + '?' + params.toString(), { scroll: false });
   };
 
