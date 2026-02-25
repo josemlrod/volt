@@ -31,6 +31,7 @@ export function ProductsPagination({
   };
 
   const links = Array.from({ length: totalPages }).map((_, index) => index + 1);
+  
   const isFirstPage = Number(currentPage) <= 1;
   const isLastPage = Number(currentPage) >= Number(totalPages);
 
@@ -41,9 +42,8 @@ export function ProductsPagination({
           <PaginationPrevious
             aria-disabled={isFirstPage} className={isFirstPage ? 'pointer-events-none opacity-50' : ''}
             onClick={() => {
-              if (isFirstPage) return;
               router.push(
-                `/?page=${Number(currentPage) - 1}&itemsPerPage=${Number(4)}`,
+                `/?page=${Number(currentPage) - 1}`,
                 { scroll: false }
               );
             }}
@@ -69,7 +69,7 @@ export function ProductsPagination({
             onClick={() => {
               if (isLastPage) return;
               router.push(
-                `/?page=${Number(currentPage) + 1}&itemsPerPage=${Number(4)}`,
+                `/?page=${Number(currentPage) + 1}`,
                 { scroll: false }
               );
             }}
