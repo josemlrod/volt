@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { ShoppingBag, Menu, X } from 'lucide-react';
+import { ShoppingBag, Menu, X, LogIn } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/theme-toggle';
@@ -42,6 +42,12 @@ export function SiteHeader() {
 
         <div className='flex items-center gap-2'>
           <ThemeToggle />
+          <Link href='/login'>
+            <Button variant='ghost' size='icon' className='h-9 w-9'>
+              <LogIn className='h-4 w-4' />
+              <span className='sr-only'>Login</span>
+            </Button>
+          </Link>
           <Link href='/cart'>
             <Button variant='ghost' size='icon' className='relative h-9 w-9'>
               <ShoppingBag className='h-4 w-4' />
