@@ -1,4 +1,4 @@
- 'use client'
+"use client"
 
 import { FormEvent, useState } from "react"
 import Link from "next/link"
@@ -7,44 +7,51 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
-export default function LoginPage() {
+export default function SignupPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [confirmPassword, setConfirmPassword] = useState("")
+  const [isSubmitting, setIsnpmSubmitting] = useState(false)
 
-  async function handleLogin(e: FormEvent<HTMLFormElement>) {
+  async function handleSignup(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    setIsSubmitting(true)
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match.")
+      return
+    }
+
+    setIsnpmSubmitting(true)
     try {
-      // TODO: Replace with real login API call
-      console.log("Log in user with email/password", { email, password })
-      alert("Login submitted. Wire this up to your auth backend.")
+      // TODO: Replace with real sign-up API call
+      console.log("Sign up user", { email, password })
+      alert("Sign-up submitted. Wire this up to your backend.")
     } finally {
-      setIsSubmitting(false)
+      setIsnpmSubmitting(false)
     }
   }
 
-  function handleGoogleLogin() {
+  function handleGoogleSignup() {
     // TODO: Replace with your Google OAuth route or provider
-    console.log("Google login clicked")
-    alert("Google login clicked. Point this to your Google auth route.")
+    console.log("Google sign-up clicked on signup page")
+    alert("Google sign-up clicked. Point this to your Google auth route.")
   }
 
   return (
     <div className="flex min-h-[calc(100vh-5rem)] items-center justify-center px-4 py-12">
       <div className="w-full max-w-md rounded-xl border border-border/60 bg-card/80 p-8 shadow-lg backdrop-blur">
         <div className="mb-6 text-center">
-          <h1 className="text-2xl font-semibold tracking-tight">Welcome back!</h1>
+          <h1 className="text-2xl font-semibold tracking-tight">Create your account</h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Log in to access your account and manage your cart.
+            Sign up to start shopping and manage your cart across devices.
           </p>
         </div>
 
-        <form onSubmit={handleLogin} className="space-y-4">
+        <form onSubmit={handleSignup} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="register-email">Email</Label>
             <Input
-              id="email"
+              id="register-email"
               type="email"
               autoComplete="email"
               required
@@ -55,9 +62,9 @@ export default function LoginPage() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="register-password">Password</Label>
             <Input
-              id="password"
+              id="register-password"
               type="password"
               autoComplete="new-password"
               required
@@ -67,12 +74,25 @@ export default function LoginPage() {
             />
           </div>
 
+          <div className="space-y-2">
+            <Label htmlFor="register-confirm-password">Confirm password</Label>
+            <Input
+              id="register-confirm-password"
+              type="password"
+              autoComplete="new-password"
+              required
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="••••••••"
+            />
+          </div>
+
           <Button
             type="submit"
             className="mt-2 w-full"
             disabled={isSubmitting}
           >
-            {isSubmitting ? "Log in..." : "Log in"}
+            {isSubmitting ? "Signing up..." : "Sign up"}
           </Button>
         </form>
 
@@ -86,7 +106,7 @@ export default function LoginPage() {
           type="button"
           variant="outline"
           className="flex w-full items-center justify-center gap-2"
-          onClick={handleGoogleLogin}
+          onClick={handleGoogleSignup}
         >
           <svg
             aria-hidden="true"
@@ -114,11 +134,21 @@ export default function LoginPage() {
         </Button>
 
         <p className="mt-6 text-center text-sm text-muted-foreground">
-          Need an account?{" "}
-          <Link href="/signup" className="font-medium text-primary underline-offset-4 hover:underline">
-            Sign up
+          Already have an account?{" "}
+          <Link href="/login" className="font-medium text-primary underline-offset-4 hover:underline">
+            Log in
           </Link>
         </p>
+        <div>
+          <Link href={'/'}>
+            <Button
+              type="submit"
+              className="mt-5 w-full"
+            >
+              Home
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   )}
