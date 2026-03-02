@@ -27,7 +27,6 @@ export function ProductsPagination({
     const params = new URLSearchParams(searchParams.toString());
     params.set('page', String(page));
     router.push(pathname + '?' + params.toString(), { scroll: false });
-    changePage(page);
   };
 
   const links = Array.from({ length: totalPages }).map((_, index) => index + 1);
@@ -37,13 +36,6 @@ export function ProductsPagination({
   const changePage = (page: number) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("page", String(page));
-    router.push(pathname + "?" + params.toString(), { scroll: false });
-  };
-  
-  const changePageSize = (size: number) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("itemsPerPage", String(size));
-    params.set("page", "1");
     router.push(pathname + "?" + params.toString(), { scroll: false });
   };
 
