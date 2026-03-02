@@ -1,7 +1,5 @@
 'use client';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { Field, FieldLabel } from "@/components/ui/field"
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectItem } from "@/components/ui/select"
 import {
   Pagination,
   PaginationContent,
@@ -50,8 +48,7 @@ export function ProductsPagination({
   };
 
   return (
-    <Pagination className="w-full flex items-center">
-      <div className="flex-1" />
+    <Pagination>
       <PaginationContent className="justify-center flex-1">
         <PaginationItem>
           <PaginationPrevious
@@ -80,22 +77,6 @@ export function ProductsPagination({
           />
         </PaginationItem>
       </PaginationContent>
-      <div className="flex flex-1 items-center justify-end gap-4 mr-4">
-        <Field orientation="horizontal" className="w-fit">
-          <FieldLabel htmlFor="select-rows-per-page">Rows per page</FieldLabel>
-          <Select defaultValue="10" onValueChange={(value) => changePageSize(Number(value))}>
-            <SelectTrigger className="w-20" id="select-rows-per-page">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent align="start">
-              <SelectGroup>
-                <SelectItem value="10">10</SelectItem>
-                <SelectItem value="25">25</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </Field>
-      </div>
     </Pagination>
   )
 }
