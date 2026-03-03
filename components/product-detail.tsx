@@ -6,12 +6,17 @@ import { ArrowLeft, ShoppingBag, Check, Truck, Shield, RotateCcw } from "lucide-
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { Badge } from "@/components/ui/badge"
-import type { Product } from "@/lib/products"
 import { useCart } from "@/lib/cart-store"
+import { Product } from '@/lib/products';
 import { ProductCard } from "@/components/product-card"
 import { useState } from "react"
 
-export function ProductDetail({ product }: { product: Product }) {
+type Props = {
+    product: Product;
+    products: Product[];
+  };
+  
+export function ProductDetail({ product,products }: Props) {
   const { add } = useCart()
   const [added, setAdded] = useState(false)
 
@@ -22,7 +27,7 @@ export function ProductDetail({ product }: { product: Product }) {
   }
 
   const related = products
-    .filter((p) => p.category === product.category && p.id !== product.id)
+    .filter((p : any) => p.category === product.category && p.id !== product.id)
     .slice(0, 4)
 
   return (
@@ -74,7 +79,7 @@ export function ProductDetail({ product }: { product: Product }) {
           </p>
 
           <div className="mt-6 grid grid-cols-2 gap-3">
-            {product.specs.map((spec) => (
+            {product.specs.map((spec : any) => (
               <div
                 key={spec}
                 className="flex items-center gap-2 rounded-lg bg-secondary/60 px-3 py-2.5"
@@ -126,7 +131,7 @@ export function ProductDetail({ product }: { product: Product }) {
         <section className="mt-20">
           <h2 className="text-xl font-semibold tracking-tight">You might also like</h2>
           <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4 lg:gap-6">
-            {related.map((p) => (
+            {related.map((p: any) => (
               <ProductCard key={p.id} product={p} />
             ))}
           </div>
