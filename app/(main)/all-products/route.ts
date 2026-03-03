@@ -1,4 +1,4 @@
-import { products } from '@/lib/products';
+import { getProducts } from '@/lib/db';
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
@@ -6,6 +6,8 @@ export async function GET(request: Request) {
 
   const page = Number(queryParams.get('page'));
   const itemsPerPage = Number(queryParams.get('itemsPerPage'));
+
+  const products = await getProducts();
 
   const totalPages = products.length / itemsPerPage;
 
