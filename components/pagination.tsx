@@ -1,6 +1,5 @@
 'use client';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-
 import {
   Pagination,
   PaginationContent,
@@ -24,7 +23,7 @@ export function ProductsPagination({
   const searchParams = useSearchParams();
 
   const setPageNumber = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const page = e.currentTarget.dataset.value;
+    const page =Number(e.currentTarget.dataset.value);
     const params = new URLSearchParams(searchParams.toString());
     params.set('page', String(page));
     router.push(pathname + '?' + params.toString(), { scroll: false });
@@ -34,28 +33,27 @@ export function ProductsPagination({
   const isFirstPage = Number(currentPage) <= 1;
   const isLastPage = Number(currentPage) >= Number(totalPages);
 
+  const changePage = (page: number) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("page", String(page));
+    router.push(pathname + "?" + params.toString(), { scroll: false });
+  };
+
   return (
     <Pagination>
-      <PaginationContent>
+      <PaginationContent className="justify-center flex-1">
         <PaginationItem>
           <PaginationPrevious
-            aria-disabled={isFirstPage} className={isFirstPage ? 'pointer-events-none opacity-50' : ''}
-            onClick={() => {
-              if (isFirstPage) return;
-              router.push(
-                `/?page=${Number(currentPage) - 1}&itemsPerPage=${Number(4)}`,
-                { scroll: false }
-              );
-            }}
-          />
+            aria-disabled={isFirstPage}
+            className={isFirstPage ? 'pointer-events-none opacity-50' : ''}
+            onClick={() =>  !isFirstPage && changePage(Number(currentPage) - 1)}/>
         </PaginationItem>
         {links.map((num) => {
           return (
-            <PaginationItem>
+            <PaginationItem key={num}>
               <PaginationLink
                 onClick={setPageNumber}
                 data-value={num}
-                key={num}
                 isActive={Number(currentPage) === num}
               >
                 {num}
@@ -65,18 +63,12 @@ export function ProductsPagination({
         })}
         <PaginationItem>
           <PaginationNext
-            aria-disabled={isLastPage} className={isLastPage ? 'pointer-events-none opacity-50' : ''}
-            onClick={() => {
-              if (isLastPage) return;
-              router.push(
-                `/?page=${Number(currentPage) + 1}&itemsPerPage=${Number(4)}`,
-                { scroll: false }
-              );
-            }}
+            aria-disabled={isLastPage}
+            className={isLastPage ? 'pointer-events-none opacity-50' : ''}
+            onClick={() => !isLastPage && changePage(Number(currentPage) + 1)}
           />
         </PaginationItem>
       </PaginationContent>
     </Pagination>
-  );
+  )
 }
-

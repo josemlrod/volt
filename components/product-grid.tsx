@@ -4,6 +4,10 @@ import { categories, Product } from '@/lib/products';
 import { ProductCard } from '@/components/product-card';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 
+import { Field, FieldLabel } from "@/components/ui/field"
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectItem } from "@/components/ui/select"
+
+
 type Props = {
   products: Product[];
 };
@@ -14,6 +18,28 @@ export function ProductGrid({ products }: Props) {
   const pathname = usePathname();
   const categoryParam = searchParams.get('category');
   const [active, setActive] = useState(categoryParam || 'All');
+
+  const setPageNumber = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const page = Number(e.currentTarget.dataset.value);
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('page', String(page));
+    router.push(pathname + '?' + params.toString(), { scroll: false });
+    changePage(page);
+  };
+
+
+  const changePage = (page: number) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("page", String(page));
+    router.push(pathname + "?" + params.toString(), { scroll: false });
+  };
+
+  const changePageSize = (size: number) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("itemsPerPage", String(size));
+    params.set("page", "1");
+    router.push(pathname + "?" + params.toString(), { scroll: false });
+  };
 
   // Sincronizar estado con la URL cuando cambia
   useEffect(() => {
@@ -44,15 +70,30 @@ export function ProductGrid({ products }: Props) {
           <button
             key={cat}
             onClick={() => handleCategoryClick(cat)}
-            className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
-              active === cat
+            className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${active === cat
                 ? 'bg-foreground text-background'
                 : 'bg-secondary text-muted-foreground hover:text-foreground'
-            }`}
+              }`}
           >
             {cat}
           </button>
         ))}
+        <div className="flex flex-1 items-center justify-end gap-4 mr-4">
+          <Field orientation="horizontal" className="w-fit">
+            <FieldLabel htmlFor="select-rows-per-page">Products per page</FieldLabel>
+            <Select defaultValue="10" onValueChange={(value) => changePageSize(Number(value))}>
+              <SelectTrigger className="w-20" id="select-rows-per-page">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent align="start">
+                <SelectGroup>
+                  <SelectItem value="10">10</SelectItem>
+                  <SelectItem value="25">25</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </Field>
+        </div>
       </div>
 
       <div className='mt-8 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-6'>
