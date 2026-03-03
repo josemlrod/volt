@@ -10,15 +10,20 @@ import {
   CarouselItem,
   type CarouselApi,
 } from '@/components/ui/carousel';
-import { Product } from '@/lib/products';
+import { categories, Product } from '@/lib/products';
 
 type Props = {
   featured: Product[];
+  category?: string;
 };
 
-export function HeroCarousel({ featured }: Props) {
+
+
+export function HeroCarousel({ featured, category }: Props) {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
+
+  const visibleProducts = category && category !== 'All' ? featured.filter((p)=> p.category == category) : featured;
 
   useEffect(() => {
     if (!api) return;
@@ -45,7 +50,7 @@ export function HeroCarousel({ featured }: Props) {
         className='w-full'
       >
         <CarouselContent>
-          {featured.map((product) => (
+          {visibleProducts.map((product) => (
             <CarouselItem key={product.id}>
               <div className='relative flex min-h-[70vh] flex-col items-center justify-center overflow-hidden bg-secondary/50 px-4 py-20 lg:flex-row lg:px-16'>
                 <div className='z-10 flex max-w-xl flex-col items-center text-center lg:items-start lg:text-left'>
@@ -104,9 +109,9 @@ export function HeroCarousel({ featured }: Props) {
           <span className='sr-only'>Previous</span>
         </Button>
         <div className='flex items-center gap-1.5'>
-          {featured.map((_, i) => (
+          {visibleProducts.map((_, i) => (
             <button
-              key={`dot-${featured[i].id}`}
+              key={`dot-${visibleProducts[i].id}`}
               className={`h-1.5 rounded-full transition-all ${
                 i === current ? 'w-6 bg-foreground' : 'w-1.5 bg-foreground/30'
               }`}
