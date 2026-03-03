@@ -26,9 +26,6 @@ export default async function Home({ searchParams }: PageProps) {
   );
   const { data: featured } = await getFeaturedProductsResponse.json();
 
-  // TODO:
-  // implement UI to paginate
-  // replace static values here
   const allProductsResponse = await fetch(
     `${DOMAIN}/all-products?page=${page}&itemsPerPage=10`,
     {
@@ -40,7 +37,6 @@ export default async function Home({ searchParams }: PageProps) {
     currentPage,
     totalPages,
   } = await allProductsResponse.json();
-
 
   return (
     <>
