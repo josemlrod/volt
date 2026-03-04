@@ -18,22 +18,7 @@ export function ProductGrid({ products }: Props) {
   const pathname = usePathname();
   const categoryParam = searchParams.get('category');
   const [active, setActive] = useState(categoryParam || 'All');
-
-  const setPageNumber = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const page = Number(e.currentTarget.dataset.value);
-    const params = new URLSearchParams(searchParams.toString());
-    params.set('page', String(page));
-    router.push(pathname + '?' + params.toString(), { scroll: false });
-    changePage(page);
-  };
-
-
-  const changePage = (page: number) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("page", String(page));
-    router.push(pathname + "?" + params.toString(), { scroll: false });
-  };
-
+  
   const changePageSize = (size: number) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("itemsPerPage", String(size));
