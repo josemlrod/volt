@@ -16,7 +16,7 @@ type PageProps = {
 };
 
 export default async function Home({ searchParams }: PageProps) {
-  const { page = 1, itemsPerPage = 10 } = await searchParams;
+  const { page = 1, itemsPerPage = 10, category } = await searchParams;
 
   const getFeaturedProductsResponse = await fetch(
     `${DOMAIN}/get-featured-products`,
@@ -26,8 +26,9 @@ export default async function Home({ searchParams }: PageProps) {
   );
   const { data: featured } = await getFeaturedProductsResponse.json();
 
+  const categoryParam = category ? `&category=${category}` : '';
   const allProductsResponse = await fetch(
-    `${DOMAIN}/all-products?page=${page}&itemsPerPage=${itemsPerPage}`,
+    `${DOMAIN}/all-products?page=${page}&itemsPerPage=${itemsPerPage}${categoryParam}`,
     {
       method: 'GET',
     },
