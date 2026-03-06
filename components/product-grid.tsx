@@ -25,20 +25,6 @@ export function ProductGrid({ products }: Props) {
   const categoryParam = searchParams.get('category');
   const [active, setActive] = useState(categoryParam || 'All');
 
-  const setPageNumber = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const page = Number(e.currentTarget.dataset.value);
-    const params = new URLSearchParams(searchParams.toString());
-    params.set('page', String(page));
-    router.push(pathname + '?' + params.toString(), { scroll: false });
-    changePage(page);
-  };
-
-  const changePage = (page: number) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set('page', String(page));
-    router.push(pathname + '?' + params.toString(), { scroll: false });
-  };
-
   const changePageSize = (size: number) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set('itemsPerPage', String(size));
@@ -75,11 +61,10 @@ export function ProductGrid({ products }: Props) {
           <button
             key={cat}
             onClick={() => handleCategoryClick(cat)}
-            className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
-              active === cat
+            className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${active === cat
                 ? 'bg-foreground text-background'
                 : 'bg-secondary text-muted-foreground hover:text-foreground'
-            }`}
+              }`}
           >
             {cat}
           </button>

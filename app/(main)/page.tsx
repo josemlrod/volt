@@ -5,6 +5,7 @@ import { Suspense } from 'react';
 import { ProductsPagination } from '@/components/pagination';
 import { HeroCarousel } from '@/components/hero-carousel';
 import { ProductGrid } from '@/components/product-grid';
+import { categories } from '@/lib/products';
 
 const DOMAIN = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -41,9 +42,9 @@ export default async function Home({ searchParams }: PageProps) {
 
   return (
     <>
-      <HeroCarousel featured={featured} />
+      <HeroCarousel featured={featured} category={typeof category === 'string' ? category:undefined}/>
       <Suspense>
-        <ProductGrid products={allProducts} />
+        <ProductGrid products={allProducts}  />
         <ProductsPagination currentPage={currentPage} totalPages={totalPages} />
       </Suspense>
     </>
